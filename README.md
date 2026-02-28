@@ -124,7 +124,7 @@ securevault/
 
 ## 🔐 Security Decision: Refresh Token Rotation
 
-I implemented refresh token rotation to prevent replay attacks and token theft. When a user requests a new access token using their refresh token:
+ Implemented refresh token rotation to prevent replay attacks and token theft. When a user requests a new access token using their refresh token:
 
 1. The old refresh token is immediately revoked
 2. A new refresh token with the same family ID is issued
