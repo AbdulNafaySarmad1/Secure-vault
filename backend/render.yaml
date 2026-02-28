@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: securevault-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DB_HOST
+        fromDatabase:
+          name: securevault-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: securevault-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: securevault-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: securevault-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: securevault-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://securevault-web.vercel.app
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1
+
+databases:
+  - name: securevault-db
+    databaseName: securevault
+    user: securevault
+    plan: free
